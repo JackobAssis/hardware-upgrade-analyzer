@@ -1,12 +1,74 @@
 {
-    "cpus": [
-      { "model": "Intel Core i5-12400F", "performance": 36 },
-      { "model": "AMD Ryzen 5 5600G", "performance": 34 },
-      { "model": "Intel Core i3-10100F", "performance": 24 }
-    ],
-    "gpus": [
-      { "model": "NVIDIA GTX 1660", "rank": 8 },
-      { "model": "NVIDIA RTX 3060", "rank": 3 },
-      { "model": "AMD Radeon RX 6600", "rank": 5 }
-    ]
+  "cpus": {
+    "Intel": {
+      "Core i3": {
+        "4th Gen": {
+          "models": ["i3-4005U", "i3-4150"],
+          "compatibleUpgrades": ["i5-4xxx", "i7-4xxx"]
+        },
+        "5th Gen": {
+          "models": ["i3-5005U", "i3-5157U"],
+          "compatibleUpgrades": ["i5-5xxx", "i7-5xxx"]
+        }
+      },
+      "Core i5": {
+        "4th Gen": {
+          "models": ["i5-4200U", "i5-4300U"],
+          "compatibleUpgrades": ["i7-4xxx"]
+        },
+        "5th Gen": {
+          "models": ["i5-5200U", "i5-5300U"],
+          "compatibleUpgrades": ["i7-5xxx"]
+        }
+      },
+      "Core i7": {
+        "4th Gen": {
+          "models": ["i7-4700HQ", "i7-4770K"],
+          "compatibleUpgrades": ["i7-5xxx", "i7-6xxx"]
+        }
+      }
+    },
+    "AMD": {
+      "Ryzen 3": {
+        "1st Gen": {
+          "models": ["2200G", "1200"],
+          "compatibleUpgrades": ["Ryzen 5 2xxx", "Ryzen 7 1xxx"]
+        }
+      },
+      "Ryzen 5": {
+        "1st Gen": {
+          "models": ["1600", "1500X"],
+          "compatibleUpgrades": ["Ryzen 7 2xxx", "Ryzen 7 3xxx"]
+        }
+      }
+    }
+  },
+  "memory": {
+    "DDR3": {
+      "maxSpeed": "1600MHz",
+      "compatibleWith": ["Intel 4th Gen", "Intel 5th Gen", "AMD FX"]
+    },
+    "DDR4": {
+      "maxSpeed": "3200MHz",
+      "compatibleWith": ["Intel 6th Gen+", "AMD Ryzen"]
+    }
+  },
+  "gpus": {
+    "NVIDIA": {
+      "GTX 10 Series": {
+        "models": ["GTX 1050", "GTX 1060", "GTX 1070"],
+        "compatibleUpgrades": ["RTX 20 Series", "RTX 30 Series"]
+      },
+      "RTX 20 Series": {
+        "models": ["RTX 2060", "RTX 2070"],
+        "compatibleUpgrades": ["RTX 30 Series"]
+      }
+    },
+    "AMD": {
+      "RX 500 Series": {
+        "models": ["RX 560", "RX 570", "RX 580"],
+        "compatibleUpgrades": ["RX 6000 Series"]
+      }
+    }
   }
+}
