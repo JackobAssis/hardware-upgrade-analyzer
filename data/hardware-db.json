@@ -1,0 +1,12 @@
+{
+    "cpus": [
+      { "model": "Intel Core i5-12400F", "performance": 36 },
+      { "model": "AMD Ryzen 5 5600G", "performance": 34 },
+      { "model": "Intel Core i3-10100F", "performance": 24 }
+    ],
+    "gpus": [
+      { "model": "NVIDIA GTX 1660", "rank": 8 },
+      { "model": "NVIDIA RTX 3060", "rank": 3 },
+      { "model": "AMD Radeon RX 6600", "rank": 5 }
+    ]
+  }
