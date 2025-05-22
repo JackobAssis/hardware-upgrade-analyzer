@@ -38,7 +38,7 @@ npm install
 
 # Execute no terminal:
 
-node cli/main.js
+node index.js
 
 
 # Você verá algo como:
