@@ -1,0 +1,33 @@
+{
+  "name": "hardware-upgrade-analyzer",
+  "version": "1.0.0",
+  "description": "Projeto CLI que analisa o hardware local e sugere upgrades com base em uma base de dados interna. Futuramente integrável com IA e lojas parceiras.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Nenhum teste configurado ainda\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JackobAssis/hardware-upgrade-analyzer.git"
+  },
+  "keywords": [
+    "hardware",
+    "upgrade",
+    "cli",
+    "sistema",
+    "nodejs",
+    "analise",
+    "recomendacao"
+  ],
+  "author": "JackobAssis e VitorImports",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JackobAssis/hardware-upgrade-analyzer/issues"
+  },
+  "homepage": "https://github.com/JackobAssis/hardware-upgrade-analyzer#readme",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  }
+}
