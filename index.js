@@ -12,7 +12,6 @@ async function main() {
 
     console.log(`🖥  Sistema operacional: ${hardware.os}`);
     console.log(`💻  Arquitetura: ${hardware.arch}`);
-
     console.log(`\n🧠  CPU detectada: ${hardware.cpu.name}`);
     console.log(`🎮  GPU detectada: ${hardware.gpu.name}`);
     console.log(`💾  Memória RAM detectada: ${hardware.ram.amountGB} GB (${hardware.ram.type})`);

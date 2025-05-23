@@ -2,11 +2,20 @@
   "name": "hardware-upgrade-analyzer",
   "version": "1.0.0",
   "type": "module",
-  "description": "Projeto CLI que analisa o hardware local e sugere upgrades com base em uma base de dados interna. Futuramente integrável com IA e lojas parceiras.",
   "main": "index.js",
+  "bin": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Nenhum teste configurado ainda\" && exit 0"
+    "start": "node index.js"
+  },
+  "pkg": {
+    "scripts": [
+      "core/*.js"
+    ],
+    "targets": [
+      "node18-win-x64",
+      "node18-linux-x64"
+    ],
+    "outputPath": "dist"
   },
   "repository": {
     "type": "git",
