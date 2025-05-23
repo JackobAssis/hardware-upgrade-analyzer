@@ -1,45 +1,26 @@
-const { readHardware } = require('./core/hardwareReader');
-const { recommendUpgrades } = require('./core/recommender');
+import dotenv from 'dotenv';
+dotenv.config();
 
-function printHardwareInfo(hardware, recommendations) {
-  console.log('🔍 Detectando informações de hardware...\n');
-
-  console.log(`🖥️ Sistema operacional: ${hardware.os}`);
-  console.log(`💻 Arquitetura: ${hardware.arch}\n`);
-
-  // Como hardware.cpu e hardware.gpu são objetos, formatamos para string
-  console.log(`🧠 CPU detectada: ${hardware.cpu.name || 'Não detectada'}`);
-  console.log(`🎮 GPU detectada: ${hardware.gpu.name || 'Não detectada'}`);
-  console.log(`💾 Memória detectada: ${hardware.ram.amountGB} GB (${hardware.ram.type})\n`);
-
-  console.log('⚙️ Recomendações Gerais:\n');
-
-  const cpuRec = recommendations.find(r => r.toLowerCase().includes('cpu'));
-  const gpuRec = recommendations.find(r => r.toLowerCase().includes('gpu'));
-  const ramRec = recommendations.find(r => r.toLowerCase().includes('memória') || r.toLowerCase().includes('ram'));
-
-  console.log('🔧 CPU:');
-  console.log(cpuRec ? `  - ${cpuRec}` : '  - Nenhuma sugestão de upgrade para CPU.\n');
-
-  console.log('\n🖥️ GPU:');
-  console.log(gpuRec ? `  - ${gpuRec}` : '  - Nenhuma sugestão de upgrade para GPU.\n');
-
-  console.log('\n💾 Memória:');
-  console.log(ramRec ? `  - ${ramRec}` : '  - Nenhuma sugestão de upgrade para memória.\n');
-
-  console.log('\n---');
-}
+import { readHardware } from './core/hardwareReader.js';
+import { analisarComIA } from './core/hardwareAdvisor.js';
 
 async function main() {
+  console.log('🔍 Detectando informações de hardware...\n');
+
   try {
     const hardware = await readHardware();
 
-    // Recebe as recomendações com base no hardware
-    const recommendations = recommendUpgrades(hardware);
+    console.log(`🖥  Sistema operacional: ${hardware.os}`);
+    console.log(`💻  Arquitetura: ${hardware.arch}`);
 
-    printHardwareInfo(hardware, recommendations);
+    console.log(`\n🧠  CPU detectada: ${hardware.cpu.name}`);
+    console.log(`🎮  GPU detectada: ${hardware.gpu.name}`);
+    console.log(`💾  Memória RAM detectada: ${hardware.ram.amountGB} GB (${hardware.ram.type})`);
+
+    // Chama IA para análise e sugestões
+    await analisarComIA(hardware);
   } catch (error) {
-    console.error('❌ Erro ao executar:', error);
+    console.error(`\n❌ Erro ao executar: ${error.message}`);
   }
 }
 

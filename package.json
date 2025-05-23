@@ -1,6 +1,7 @@
 {
   "name": "hardware-upgrade-analyzer",
   "version": "1.0.0",
+  "type": "module",
   "description": "Projeto CLI que analisa o hardware local e sugere upgrades com base em uma base de dados interna. Futuramente integrável com IA e lojas parceiras.",
   "main": "index.js",
   "scripts": {
@@ -29,5 +30,9 @@
   "directories": {
     "doc": "docs",
     "test": "test"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "openai": "^4.103.0"
   }
 }
