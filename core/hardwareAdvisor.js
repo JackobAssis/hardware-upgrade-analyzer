@@ -11,7 +11,7 @@ export async function analisarComIA(userInput) {
   const completion = await openai.chat.completions.create({
     model: "gpt-3.5-turbo", // pode trocar para "gpt-3.5-turbo" se quiser economizar tokens
     messages: [
-      {{
+      {
   role: "system",
   content: `
     Você é um especialista técnico em hardware de computadores. 
