@@ -1,7 +1,6 @@
 {
   "name": "hardware-upgrade-analyzer",
   "version": "1.0.0",
-  "type": "module",
   "main": "index.js",
   "bin": "index.js",
   "scripts": {

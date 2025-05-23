@@ -1,5 +1,5 @@
-import os from 'os';
-import { execSync } from 'child_process';
+const os = require('os');
+const { execSync } = require('child_process');
 
 function getCpuInfo() {
   const cpus = os.cpus();
@@ -42,7 +42,7 @@ function getRamInfo() {
   return { amountGB: totalMemGB, type: 'DDR3' }; // tipo fictício por enquanto
 }
 
-export async function readHardware() {
+async function readHardware() {
   return {
     cpu: getCpuInfo(),
     gpu: getGpuInfo(),
@@ -51,3 +51,5 @@ export async function readHardware() {
     arch: os.arch()
   };
 }
+
+module.exports = { readHardware };
