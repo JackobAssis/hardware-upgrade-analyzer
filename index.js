@@ -1,54 +1,46 @@
-const os = require('os');
-const { findCpuUpgrade, findGpuUpgrade, findMemoryUpgrade } = require('./core/hardwareService');
+const { readHardware } = require('./core/hardwareReader');
 const { recommendUpgrades } = require('./core/recommender');
 
-const detectedCpuModel = 'i5-4200U';
-const detectedGpuModel = 'GTX 1060';
-const detectedMemoryType = 'DDR3';
+function printHardwareInfo(hardware, recommendations) {
+  console.log('🔍 Detectando informações de hardware...\n');
 
-console.log('Detectando informações de hardware...\n');
-console.log(`Sistema operacional: ${os.platform()}`);
-console.log(`Arquitetura: ${os.arch()}`);
-console.log(`CPU detectada: ${detectedCpuModel}`);
-console.log(`GPU detectada: ${detectedGpuModel}`);
-console.log(`Memória detectada: ${detectedMemoryType}`);
+  console.log(`🖥️ Sistema operacional: ${hardware.os}`);
+  console.log(`💻 Arquitetura: ${hardware.arch}\n`);
 
-const cpuInfo = findCpuUpgrade(detectedCpuModel);
-if (cpuInfo) {
-  console.log('\nSugestões de upgrade para CPU:');
-  console.log(`Marca: ${cpuInfo.brand}`);
-  console.log(`Família: ${cpuInfo.family}`);
-  console.log(`Geração: ${cpuInfo.generation}`);
-  console.log(`Upgrades compatíveis: ${cpuInfo.compatibleUpgrades.join(', ')}`);
-} else {
-  console.log('\nNenhuma sugestão de upgrade para CPU encontrada.');
+  // Como hardware.cpu e hardware.gpu são objetos, formatamos para string
+  console.log(`🧠 CPU detectada: ${hardware.cpu.name || 'Não detectada'}`);
+  console.log(`🎮 GPU detectada: ${hardware.gpu.name || 'Não detectada'}`);
+  console.log(`💾 Memória detectada: ${hardware.ram.amountGB} GB (${hardware.ram.type})\n`);
+
+  console.log('⚙️ Recomendações Gerais:\n');
+
+  const cpuRec = recommendations.find(r => r.toLowerCase().includes('cpu'));
+  const gpuRec = recommendations.find(r => r.toLowerCase().includes('gpu'));
+  const ramRec = recommendations.find(r => r.toLowerCase().includes('memória') || r.toLowerCase().includes('ram'));
+
+  console.log('🔧 CPU:');
+  console.log(cpuRec ? `  - ${cpuRec}` : '  - Nenhuma sugestão de upgrade para CPU.\n');
+
+  console.log('\n🖥️ GPU:');
+  console.log(gpuRec ? `  - ${gpuRec}` : '  - Nenhuma sugestão de upgrade para GPU.\n');
+
+  console.log('\n💾 Memória:');
+  console.log(ramRec ? `  - ${ramRec}` : '  - Nenhuma sugestão de upgrade para memória.\n');
+
+  console.log('\n---');
 }
 
-const gpuInfo = findGpuUpgrade(detectedGpuModel);
-if (gpuInfo) {
-  console.log('\nSugestões de upgrade para GPU:');
-  console.log(`Marca: ${gpuInfo.brand}`);
-  console.log(`Série: ${gpuInfo.series}`);
-  console.log(`Upgrades compatíveis: ${gpuInfo.compatibleUpgrades.join(', ')}`);
-} else {
-  console.log('\nNenhuma sugestão de upgrade para GPU encontrada.');
+async function main() {
+  try {
+    const hardware = await readHardware();
+
+    // Recebe as recomendações com base no hardware
+    const recommendations = recommendUpgrades(hardware);
+
+    printHardwareInfo(hardware, recommendations);
+  } catch (error) {
+    console.error('❌ Erro ao executar:', error);
+  }
 }
 
-const memoryInfo = findMemoryUpgrade(detectedMemoryType);
-if (memoryInfo) {
-  console.log('\nSugestões de upgrade de Memória:');
-  console.log(`Tipo: ${detectedMemoryType}`);
-  console.log(`Velocidade Máxima: ${memoryInfo.maxSpeed}`);
-  console.log(`Compatível com: ${memoryInfo.compatibleWith.join(', ')}`);
-} else {
-  console.log('\nNenhuma sugestão de upgrade para Memória encontrada.');
-}
-
-console.log('\nRecomendações Gerais:');
-const recommendations = recommendUpgrades({
-  cores: 2,
-  speed: 2.5,
-  ram: 4,
-  gpu: detectedGpuModel
-});
-recommendations.forEach(r => console.log(`- ${r}`));
+main();
